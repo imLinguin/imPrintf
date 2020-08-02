@@ -1,0 +1,55 @@
+{
+    "colors": [{
+            "name": "aqua",
+            "code": "#00ffff"
+        },
+        {
+            "name": "green",
+            "code": "#2acc02"
+        },
+        {
+            "name": "blue",
+            "code": "#0339ff"
+        },
+        {
+            "name": "purple",
+            "code": "#bf00ff"
+        },
+        {
+            "name": "gold",
+            "code": "#ffd000"
+        },
+        {
+            "name": "orange",
+            "code": "#ff9900"
+        },
+        {
+            "name": "red",
+            "code": "#ff0000"
+        },
+        {
+            "name": "grey",
+            "code": "#636362"
+        },
+        {
+            "name": "white",
+            "code": "#f2f2f2"
+        },
+        {
+            "name":"pink",
+            "code":"#ff0088"
+        },
+        {
+            "name":"black",
+            "code":"#000000"
+        },
+        {
+            "name":"mint",
+            "code":"#25f5ba"
+        },
+        {
+            "name":"yellow",
+            "code":"#fffb05"
+        }
+    ]
+}
