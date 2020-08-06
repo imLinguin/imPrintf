@@ -5,6 +5,8 @@ const kolorki = require('../kolorki.json');
 module.exports = {
   "name": "embed",
   "description": "wyświetla co chcesz i kiedy chcesz",
+  "args": true,
+  "argsWzor": "<tytuł> <kolor> <tekst>",
 
   run(message, args) {
     const Discord = require('discord.js')
@@ -15,28 +17,18 @@ module.exports = {
 
 
 
-    if (!args[1] || !args[2] || !args[3]) {
-      message.reply("Błąd!").then(message => {
-        message.delete({
-          timeout: 2000
-        })
-      }).catch;
-
-      return;
-    }
-
-    if (!args[2].startsWith("#")) {
-      args[2] = args[2].toLowerCase();
-      var pom3 = GiveColor(args[2]);
-      if (args[2] === "error") {
+    if (!args[1].startsWith("#")) {
+      args[1] = args[1].toLowerCase();
+      var pom3 = GiveColor(args[1]);
+      if (args[1] === "error") {
         message.reply("Nie mam takiego koloru w bazie!");
       }
     } else {
-      pom3 = args[2]
+      pom3 = args[1]
     }
 
-    var pom = args[1].split("_").join(" ");
-    var pom2 = args[3].split("_").join(" ");
+    var pom = args[0].split("_").join(" ");
+    var pom2 = args[2].split("_").join(" ");
 
 
     const embed = new MessageEmbed()
@@ -59,7 +51,7 @@ module.exports = {
 function GiveColor(arg) {
 
   shareInfoLen = Object.keys(kolorki.colors).length - 1;
-  
+
   for (x = 0; shareInfoLen >= x; x++) {
 
     if (arg === kolorki.colors[x].name) {

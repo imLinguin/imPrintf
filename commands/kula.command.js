@@ -5,6 +5,8 @@ const {
 module.exports = {
     "name": "kula",
     "description": "kula jeść kula pić",
+    "args": true,
+    "argsWzor": "<czynność>",
 
     run(message, args) {
         const jedzonko = new MessageAttachment('https://i.imgur.com/WUIYLMt.jpg');
@@ -12,9 +14,9 @@ module.exports = {
         const spanko = new MessageAttachment('https://i.imgur.com/zfmhZ27.mp4');
         const granko = new MessageAttachment('https://i.imgur.com/1Er0sL1.mp4');
         const sranko = new MessageAttachment('https://i.imgur.com/bfZw48V.mp4');
-        args[1] = args[1].toLowerCase();
+        args[0] = args[0].toLowerCase();
 
-        switch (args[1]) {
+        switch (args[0]) {
             case 'jeść':
                 message.channel.send(jedzonko);
                 break;

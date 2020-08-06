@@ -2,6 +2,8 @@ const kolorki = require('../kolorki.json');
 module.exports = {
   "name": "poll",
   "description": "głosowanie",
+  "args": true,
+  "argsWzor": "<tytuł> <kolor> <tekst>",
 
   async run(message, args) {
 
@@ -20,11 +22,10 @@ module.exports = {
 
       return;
     }
-    var pom = args[1].split("_").join(" ");
-    var pom2 = args[3].split("_").join(" ");
-    var pom3 = GiveColor(message,args[2]);
-    if(pom3 === 0)
-    {
+    var pom = args[0].split("_").join(" ");
+    var pom2 = args[2].split("_").join(" ");
+    var pom3 = GiveColor(message, args[1]);
+    if (pom3 === 0) {
       return;
     }
     const embed = new MessageEmbed()
@@ -52,7 +53,7 @@ module.exports = {
 
 }
 
-function GiveColor(msg,arg) {
+function GiveColor(msg, arg) {
   shareInfoLen = Object.keys(kolorki.colors).length - 1;
 
   for (l = 0; shareInfoLen >= l; l++) {
