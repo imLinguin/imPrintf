@@ -7,7 +7,13 @@ const PREFIX = '(';
 const client = new Discord.Client();
 client.on('ready', () => {
   console.log(`Zalogowano jako ${client.user.tag}`);
+  client.user.setStatus('available')
+  client.user.setActivity('prefix (', {
+    type: 'PLAYING'
+  });
+
 });
+
 
 
 client.commands = new Discord.Collection();
@@ -22,6 +28,7 @@ for (const file of commandFiles) {
 
 client.on('message', message => {
   //SearchForBadWord(message);
+
   if (!message.content.startsWith(PREFIX) || message.author.bot) {
     return;
   }
