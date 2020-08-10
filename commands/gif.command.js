@@ -62,11 +62,11 @@ async function Random(msg) {
 }
 
 async function Search(msg, arg) {
-    if (arg[2].indexOf('ą') != -1 || arg[2].indexOf('ć') != -1 || arg[2].indexOf('ź') != -1 || arg[2].indexOf('ż') != -1 || arg[2].indexOf('ó') != -1 || arg[2].indexOf('ę') != -1 || arg[2].indexOf('ś') != -1 || arg[2].indexOf('ń') != -1 || arg[2].indexOf('ł') != -1) {
+    if (arg[1].indexOf('ą') != -1 || arg[1].indexOf('ć') != -1 || arg[1].indexOf('ź') != -1 || arg[1].indexOf('ż') != -1 || arg[1].indexOf('ó') != -1 || arg[1].indexOf('ę') != -1 || arg[1].indexOf('ś') != -1 || arg[1].indexOf('ń') != -1 || arg[1].indexOf('ł') != -1) {
         msg.reply("Wyszukiwanie nie może zawierać polskich znaków bo przeglądarka wybucha NotLikeThis");
         return;
     }
-    const url = `https://api.tenor.com/v1/search?key=V37IT23T7QBQ&q=${arg[2]}&locale=pl_PL&limit=20`
+    const url = `https://api.tenor.com/v1/search?key=V37IT23T7QBQ&q=${arg[1]}&locale=pl_PL&limit=20`
     await fetch(url).then(res => {
         return res.json()
     }).then(json => {
