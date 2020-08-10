@@ -12,7 +12,7 @@ module.exports = {
     "argsWzor": "<trending/random/search/info> <fraza(jeśli_search)>",
 
     run(message, args) {
-        switch (args[1]) {
+        switch (args[0]) {
             case 'trending':
                 Trending(message);
                 break;
