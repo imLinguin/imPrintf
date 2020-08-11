@@ -13,7 +13,7 @@ module.exports = {
 
 
 
-    if (!args[1] || !args[2] || !args[3]) {
+    if (!args[0] || !args[1] || !args[2]) {
       message.reply("Błąd!").then(message => {
         message.delete({
           timeout: 2000
@@ -24,6 +24,7 @@ module.exports = {
     }
     var pom = args[0].split("_").join(" ");
     var pom2 = args[2].split("_").join(" ");
+    args[2] = args[2].toLowerCase()
     var pom3 = GiveColor(message, args[1]);
     if (pom3 === 0) {
       return;
