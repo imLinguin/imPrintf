@@ -38,8 +38,7 @@ async function Trending(msg) {
     }).then(json => {
         try {
             //console.log(json.results[0].media[0].tinygif.url)
-            var pom = new MessageAttachment(json.results[Math.floor((Math.random() * 20) + 1)].media[0].tinygif.url);
-            msg.channel.send(pom);
+            msg.channel.send(json.results[Math.floor((Math.random() * 20) + 1)].media[0].gif.url);
         } catch (err) {
             msg.channel.send("Wystąpił błąd");
         }
@@ -52,8 +51,7 @@ async function Random(msg) {
     }).then(json => {
 
         try {
-            var pom = new MessageAttachment(json.results[Math.floor((Math.random() * 20) + 1)].media[0].tinygif.url);
-            msg.channel.send(pom);
+            msg.channel.send(json.results[Math.floor((Math.random() * 20) + 1)].media[0].gif.url);
         } catch (err) {
             msg.channel.send("Wystąpił błąd");
         }
@@ -79,8 +77,7 @@ async function Search(msg, arg) {
     }).then(json => {
 
         try {
-            var pom = new MessageAttachment(json.results[Math.floor((Math.random() * 20) + 1)].media[0].tinygif.url);
-            msg.channel.send(pom);
+            msg.channel.send(json.results[Math.floor((Math.random() * 20) + 1)].media[0].gif.url);
         } catch (err) {
             msg.channel.send('Wystąpił błąd');
         }
