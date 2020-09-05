@@ -45,7 +45,7 @@ client.on('message', message => {
   }
 
   try {
-    client.commands.get(cmdName).run(message, args);
+    client.commands.get(cmdName).run(message, args, client);
   } catch (error) {
     console.log(error)
   }

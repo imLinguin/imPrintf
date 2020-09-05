@@ -8,12 +8,11 @@ module.exports = {
   "args": true,
   "argsWzor": "<tytuł> <kolor> <tekst>",
 
-  run(message, args) {
+  run(message, args, client) {
     const Discord = require('discord.js')
     const {
       MessageEmbed
     } = require('discord.js');
-    const client = new Discord.Client();
 
 
 
@@ -32,6 +31,7 @@ module.exports = {
 
 
     const embed = new MessageEmbed()
+      .setAuthor(message.author.username, message.author.displayAvatarURL())
 
       .setTitle(pom)
 
@@ -39,7 +39,6 @@ module.exports = {
 
       .setDescription(pom2)
 
-      .setFooter(`sent by ${message.author.username}`)
 
     message.channel.send(embed);
 

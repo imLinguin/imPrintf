@@ -3,12 +3,12 @@ module.exports = {
     "description": "Czyści określoną liczbę wiadomości",
     "args": true,
     "argsWzor": "<liczba>",
-    run(msg, args) {
+    run(message, args, client) {
         if (!isNaN(args[0])) {
-            if (msg.member.hasPermission('MANAGE_MESSAGES')) {
-                if (msg.guild.me.hasPermission('MANAGE_MESSAGES')) {
-                    msg.channel.bulkDelete(args[0]).then(messages => {
-                        msg.channel.send(`✅ Usunięto ${messages.size} wiadomości`).then(mzg => {
+            if (message.member.hasPermission('MANAGE_MESSAGES')) {
+                if (message.guild.me.hasPermission('MANAGE_MESSAGES')) {
+                    message.channel.bulkDelete(args[0]).then(messages => {
+                        message.channel.send(`✅ Usunięto ${messages.size} wiadomości`).then(mzg => {
                             mzg.delete({
                                 timeout: 3000
                             })
@@ -17,13 +17,13 @@ module.exports = {
 
 
                 } else {
-                    msg.reply("Nie mam uprawnień, potrzebne uprawnienia to Zarządzanie Wiadomościami")
+                    message.reply("Nie mam uprawnień, potrzebne uprawnienia to Zarządzanie Wiadomościami")
                 }
             } else {
-                msg.reply('Nie masz uprawnień')
+                message.reply('Nie masz uprawnień')
             }
         } else {
-            msg.reply('Musisz podać liczbę');
+            message.reply('Musisz podać liczbę');
         }
     }
 }

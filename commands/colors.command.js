@@ -2,9 +2,9 @@ module.exports = {
     "name": "colors",
     "description": "wyświetla dostępne kolorki",
     "args": false,
+    "argsWzor": 'argumenty nie potrzebny',
 
-
-    run(message, args) {
+    run(message, args, client) {
         const kolorki = require('../kolorki.json')
         message.reply("Sprawdź dm :)").then(msg => {
             msg.delete({

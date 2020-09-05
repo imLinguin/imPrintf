@@ -8,7 +8,7 @@ module.exports = {
     "args": true,
     "argsWzor": "<czynność>",
 
-    run(message, args) {
+    run(message, args, client) {
         const jedzonko = new MessageAttachment('https://i.imgur.com/WUIYLMt.jpg');
         const picie = new MessageAttachment('https://i.imgur.com/ViLKioN.jpg');
         const spanko = new MessageAttachment('https://i.imgur.com/zfmhZ27.mp4');

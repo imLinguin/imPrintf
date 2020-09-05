@@ -1,11 +1,11 @@
 const kolorki = require('../kolorki.json');
 module.exports = {
   "name": "poll",
-  "description": "głosowanie",
+  "description": "Pozwala stworzyć głosowanie",
   "args": true,
   "argsWzor": "<tytuł> <kolor> <tekst>",
 
-  async run(message, args) {
+  async run(message, args, client) {
 
     const {
       MessageEmbed

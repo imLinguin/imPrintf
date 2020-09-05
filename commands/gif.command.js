@@ -1,5 +1,5 @@
 const fetch = require('node-fetch');
-const trendingUrl = 'https://api.tenor.com/v1/trending?key=V37IT23T7QBQ&locale=pl_PL&limit=20';
+const trendingUrl = 'https://api.tenor.com/v1/trending?key=V37IT23T7QBQ&locale=pl_PL&limit=10';
 const randomUrl = 'http://api.tenor.com/v1/random?key=V37IT23T7QBQ&q=smiech&locale=pl_PL&limit=20';
 const {
     MessageAttachment,
@@ -11,10 +11,10 @@ module.exports = {
     "args": true,
     "argsWzor": "<trending/random/search/info> <fraza(jeśli_search)>",
 
-    run(message, args) {
+    run(message, args, client) {
         switch (args[0]) {
             case 'trending':
-                Trending(message);
+                Trending(message, args);
                 break;
             case 'random':
                 Random(message);
@@ -32,16 +32,23 @@ module.exports = {
     }
 }
 
-async function Trending(msg) {
+async function Trending(msg, args) {
     await fetch(trendingUrl).then(res => {
         return res.json()
     }).then(json => {
+
+        //console.log(json.results[0].media[0].tinygif.url)
         try {
-            //console.log(json.results[0].media[0].tinygif.url)
-            msg.channel.send(json.results[Math.floor((Math.random() * 20) + 1)].media[0].gif.url);
+            if (!args[1] || !isNaN(args[1])) {
+                msg.channel.send(json.results[Math.floor((Math.random() * 10) + 1)].media[0].gif.url);
+            } else {
+                msg.channel.send(json.results[(args[1])].media[0].gif.url);
+            }
         } catch (err) {
-            msg.channel.send("Wystąpił błąd");
+            console.log(err)
         }
+
+
     }).catch();
 
 }
