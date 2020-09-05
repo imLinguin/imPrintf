@@ -8,12 +8,17 @@ const client = new Discord.Client();
 client.on('ready', () => {
   console.log(`Zalogowano jako ${client.user.tag}`);
   client.user.setStatus('available')
-  client.user.setActivity('prefix (', {
-    type: 'PLAYING'
-  });
+
+  const updateInterval = setInterval(() => {
+    client.user.setActivity(`Prefix: ( | Serwery: ${client.guilds.cache.size}`, {
+      type: 'WATCHING'
+    });
+  }, 120000)
 
 });
-
+client.on(`disconnect`, () => {
+  clearInterval(updateInterval)
+})
 
 
 client.commands = new Discord.Collection();
@@ -28,6 +33,8 @@ for (const file of commandFiles) {
 
 client.on('message', message => {
   //SearchForBadWord(message);
+
+
 
   if (!message.content.startsWith(PREFIX) || message.author.bot) {
     return;
