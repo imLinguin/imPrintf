@@ -7,11 +7,12 @@ module.exports = {
     "description": "Wyświetla dostępne komendy",
     "args": false,
     "argsWzor": "🙃🙃 właśnie używasz tej komendy 🙃🙃",
+    "aliases": ["idk", "h"],
 
     run(message, args, client) {
         const array = client.commands.array();
         if (!args[0]) {
-            const embed = new MessageEmbed().setTitle(`LISTA KOMEND`).setColor(0x0096ff)
+            const embed = new MessageEmbed().setTitle(`COMMANDS`).setColor(0x0096ff)
             array.forEach(element => {
                 embed.addField(
                     element.name,
@@ -19,14 +20,17 @@ module.exports = {
                     true
                 );
             })
-            embed.setFooter(`UŻYJ (help nazwa_komendy po przykład użycia`)
+            embed.setFooter(`USE (help command_name for an example`)
 
             message.channel.send(embed)
         } else {
             args[0] = args[0].toLowerCase()
-            cmdData = client.commands.get(args[0])
-            if (!cmdData) return message.channel.send(`Nie znaleziono komendy sprawdź czy nie pominąłeś żadnej literki 🙃`)
-            const embed = new MessageEmbed().setTitle(`PRZYKŁAD UŻYCIA KOMENDY ${args[0].toUpperCase()}`).setColor(0x0096ff)
+            cmdData = client.commands.get(args[0]) || client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(args[0]));
+            if (!cmdData) return message.channel.send(`I couldn't find that command check your spelling 🙃`)
+            let aliases
+            //making string from array
+            aliases = cmdData.aliases.join(", ")
+            const embed = new MessageEmbed().setTitle(`Example usage of ${cmdData.name.toUpperCase()} command`).setColor(0x0096ff).setFooter(`Aliases: ${aliases}`)
             embed.addField(cmdData.name, `${cmdData.description}`).addField(`(${cmdData.name} ${cmdData.argsWzor}`, '\u200b')
             message.channel.send(embed)
         }

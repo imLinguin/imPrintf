@@ -4,9 +4,10 @@ const {
 
 module.exports = {
     "name": "yoink",
-    "description": "Pozwala kraść emotki es?",
+    "description": "You can basicly STEAL emotes es?",
     "args": true,
-    "argsWzor": "<emotka lub ID>",
+    "argsWzor": "<emote or ID> <gif(if it has to be a gif)>",
+    "aliases": ["jumbo", "kradziez", "thief", "steal"],
     run(message, args, client) {
 
         let emojiID;
@@ -16,6 +17,7 @@ module.exports = {
             emojiID = args[0].substring(emojiPos + 1)
             emojiID = emojiID.substring(0, emojiID.length - 1);
             if (args[0].startsWith('<a:')) {
+                console.log(args[1])
                 animated = true;
             } else {
                 animated = false;
@@ -24,6 +26,9 @@ module.exports = {
             const numbers = new RegExp("^[0-9]+$")
             if (!numbers.test(args[0])) {
                 return message.channel.send(`Musisz podać emotkę lub ID emotki`)
+            }
+            if (args[1] === "gif") {
+                animated = true;
             }
             emojiID = args[0];
         }

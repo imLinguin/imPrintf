@@ -3,6 +3,7 @@ module.exports = {
     "description": "Czyści określoną liczbę wiadomości",
     "args": true,
     "argsWzor": "<liczba>",
+    "aliases": ["cc"],
     run(message, args, client) {
         if (!isNaN(args[0])) {
             if (message.member.hasPermission('MANAGE_MESSAGES')) {

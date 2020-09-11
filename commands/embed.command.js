@@ -7,6 +7,7 @@ module.exports = {
   "description": "wyświetla co chcesz i kiedy chcesz",
   "args": true,
   "argsWzor": "<tytuł> <kolor> <tekst>",
+  "aliases": ["emb"],
 
   run(message, args, client) {
     const Discord = require('discord.js')

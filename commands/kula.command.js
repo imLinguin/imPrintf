@@ -7,6 +7,7 @@ module.exports = {
     "description": "kula jeść kula pić",
     "args": true,
     "argsWzor": "<czynność>",
+    "aliases": ["marcinek"],
 
     run(message, args, client) {
         const jedzonko = new MessageAttachment('https://i.imgur.com/WUIYLMt.jpg');

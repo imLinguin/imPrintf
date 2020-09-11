@@ -7,6 +7,7 @@ module.exports = {
     "description": "Wyświetla avatar użytkownika",
     "args": false,
     "argsWzor": '<ping lub nic>',
+    "aliases": ["image", "icon"],
 
     run(message, args, client) {
         const mention = (message.mentions.users.first() || message.mentions.members.first());

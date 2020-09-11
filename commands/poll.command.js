@@ -1,9 +1,10 @@
 const kolorki = require('../kolorki.json');
 module.exports = {
   "name": "poll",
-  "description": "Pozwala stworzyć głosowanie",
+  "description": "You can easly create polls",
   "args": true,
-  "argsWzor": "<tytuł> <kolor> <tekst>",
+  "argsWzor": "<title> <color> <text>",
+  "aliases": ["glosowanie", "vote", "pl"],
 
   async run(message, args, client) {
 
@@ -30,7 +31,7 @@ module.exports = {
       return;
     }
     const embed = new MessageEmbed()
-
+      .setAuthor(message.author.username, message.author.displayAvatarURL())
       .setTitle(pom)
 
       .setColor(pom3)
@@ -40,13 +41,9 @@ module.exports = {
 
 
     message.channel.send(embed).then(messageReaction => {
-      if (message.guild.id === '710802417926537297') {
-        messageReaction.react(message.guild.emojis.cache.get('725654422700425286'));
-        messageReaction.react(message.guild.emojis.cache.get('725655000952471593'));
-      } else {
-        messageReaction.react('👍');
-        messageReaction.react('👎');
-      }
+      messageReaction.react('👍');
+      messageReaction.react('👎');
+
     })
     message.delete();
   }

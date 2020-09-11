@@ -18,6 +18,7 @@ client.on('ready', () => {
 });
 client.on(`disconnect`, () => {
   clearInterval(updateInterval)
+  client.stopTyping()
 })
 
 
@@ -29,30 +30,31 @@ for (const file of commandFiles) {
   if (command.name) {
     client.commands.set(command.name, command)
   }
+
 }
 
-client.on('message', message => {
+client.on('message', msg => {
   //SearchForBadWord(message);
 
-
-
+  const message = msg || msg.newMessage
   if (!message.content.startsWith(PREFIX) || message.author.bot) {
     return;
   }
   let args = message.content.slice(PREFIX.length).trim().split(" ");
   let cmdName = args[0]
+  const cmd = client.commands.get(cmdName) || client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(cmdName));
   args.shift();
 
-  if (!client.commands.has(cmdName)) {
+  if (!cmd) {
     return;
   }
-  if ((args.length === 0) && client.commands.get(cmdName).args === true) {
-    message.channel.send(`Nie podano argumentów, wzór: **${PREFIX}${cmdName} ${client.commands.get(cmdName).argsWzor}**`)
+  if ((args.length === 0) && cmd.args === true) {
+    message.channel.send(`No args given here's a template: **${PREFIX}${cmdName} ${cmd.argsWzor}**`)
     return;
   }
 
   try {
-    client.commands.get(cmdName).run(message, args, client);
+    cmd.run(message, args, client);
   } catch (error) {
     console.log(error)
   }
@@ -61,9 +63,11 @@ client.on('message', message => {
 client.login(process.env.token);
 client.on('error', error => {
   console.error(error)
+  client.stopTyping()
 });
 client.on('warn', error => {
   console.warn(warn)
+  client.stopTyping()
 });
 
 function SearchForBadWord(mzg) {

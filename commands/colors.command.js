@@ -3,6 +3,7 @@ module.exports = {
     "description": "wyświetla dostępne kolorki",
     "args": false,
     "argsWzor": 'argumenty nie potrzebny',
+    "aliases": ["kolorki"],
 
     run(message, args, client) {
         const kolorki = require('../kolorki.json')

@@ -10,6 +10,7 @@ module.exports = {
     "description": "daje gify",
     "args": true,
     "argsWzor": "<trending/random/search/info> <fraza(jeśli_search)>",
+    "aliases": ["fig"],
 
     run(message, args, client) {
         switch (args[0]) {
