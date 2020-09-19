@@ -23,15 +23,24 @@ client.on(`disconnect`, () => {
 
 
 client.commands = new Discord.Collection();
-const commandFiles = fs.readdirSync('./commands/').filter(file => file.endsWith('.command.js'));
+const Folders = fs.readdirSync('./commands/', {
+  withFileTypes: true
+}).filter(file => file.isDirectory()).map(dirent => dirent.name);
 
-for (const file of commandFiles) {
-  const command = require(`./commands/${file}`)
-  if (command.name) {
-    client.commands.set(command.name, command)
-  }
 
-}
+
+Folders.forEach(folder => {
+
+  const Files = fs.readdirSync(`./commands/${folder.toString()}`).filter(file => file.endsWith(`command.js`))
+  Files.forEach(command => {
+    comand = require(`./commands/${folder}/${command}`)
+
+    if (comand.name) {
+      client.commands.set(comand.name, comand)
+    }
+  })
+
+})
 
 client.on('message', msg => {
   //SearchForBadWord(message);
@@ -41,7 +50,7 @@ client.on('message', msg => {
     return;
   }
   let args = message.content.slice(PREFIX.length).trim().split(" ");
-  let cmdName = args[0]
+  let cmdName = args[0].toLowerCase();
   const cmd = client.commands.get(cmdName) || client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(cmdName));
   args.shift();
 

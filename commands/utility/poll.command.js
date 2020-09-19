@@ -1,4 +1,4 @@
-const kolorki = require('../kolorki.json');
+const kolorki = require('../../kolorki.json');
 module.exports = {
   "name": "poll",
   "description": "You can easly create polls",

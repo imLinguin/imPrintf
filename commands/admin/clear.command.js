@@ -11,7 +11,7 @@ module.exports = {
                     message.channel.bulkDelete(args[0]).then(messages => {
                         message.channel.send(`✅ Usunięto ${messages.size} wiadomości`).then(mzg => {
                             mzg.delete({
-                                timeout: 3000
+                                timeout: 5000
                             })
                         });
                     });

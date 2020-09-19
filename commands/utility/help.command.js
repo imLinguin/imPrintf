@@ -6,9 +6,8 @@ module.exports = {
     "name": "help",
     "description": "Wyświetla dostępne komendy",
     "args": false,
-    "argsWzor": "🙃🙃 właśnie używasz tej komendy 🙃🙃",
+    "argsWzor": "🙃🙃 you are using this command right now 🙃🙃",
     "aliases": ["idk", "h"],
-
     run(message, args, client) {
         const array = client.commands.array();
         if (!args[0]) {

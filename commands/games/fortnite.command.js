@@ -31,6 +31,7 @@ module.exports = {
                 const nick = message.content.substring(message.content.indexOf(args[1]));
                 const ID = await fortniteAPI.getAccountIdByUsername(nick);
                 if (ID.result !== true) {
+                    message.channel.stopTyping();
                     return message.channel.send(`Couldn't find player with this username!`)
                 }
                 const stats = await fortniteAPI.getGlobalPlayerStats(ID.account_id);
@@ -54,7 +55,7 @@ module.exports = {
                         })
                         .setColor(0x095ff)
 
-                    if (recentGames.matches === []) {
+                    if (recentGames.matches !== []) {
                         const latestGame = recentGames.matches[0]
                         embed.addField(`LATEST GAME`, `Kills: ${latestGame.kills}\nMode: ${latestGame.readable_name}\nPlatform: ${latestGame.platform}`, false)
                     }
@@ -63,6 +64,7 @@ module.exports = {
                     message.channel.stopTyping();
 
                 } else {
+                    message.channel.stopTyping();
                     return message.channel.send(`My man something went wrong 🚫`)
                 }
                 break;

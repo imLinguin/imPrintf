@@ -1,7 +1,7 @@
 const {
 
 } = require("discord.js");
-const kolorki = require('../kolorki.json');
+const kolorki = require('../../kolorki.json');
 module.exports = {
   "name": "embed",
   "description": "wyświetla co chcesz i kiedy chcesz",
