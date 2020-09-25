@@ -2,7 +2,7 @@ const Discord = require('discord.js');
 require('dotenv').config();
 const fs = require('fs');
 //const mongoose = require(`mongoose`);
-const PREFIX = 'b(';
+const PREFIX = '(';
 
 const client = new Discord.Client();
 
