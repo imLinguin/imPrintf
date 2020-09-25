@@ -9,6 +9,7 @@ module.exports = {
     "name": "fortnite",
     "description": "Fortnite related commands. Btw if your nick has space in it feel free to type it as it is!",
     "args": true,
+    "hidden": false,
     "argsWzor": "<map/stats/server> <nick>",
     "aliases": ["fortnight", "fortcraft", "fort"],
     async run(message, args, client) {

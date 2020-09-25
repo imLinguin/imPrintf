@@ -4,9 +4,9 @@ const {
 
 module.exports = {
     "name": "avatar",
-    "description": "Wyświetla avatar użytkownika",
+    "description": "Sends user's avatar!",
     "args": false,
-    "argsWzor": '<ping lub nic>',
+    "argsWzor": '<user>',
     "aliases": ["image", "icon"],
 
     run(message, args, client) {

@@ -1,8 +1,9 @@
 module.exports = {
     "name": "pong",
-    "description": "oj nie nie byczq",
+    "description": "Oh no man",
     "args": false,
-    "argsWzor": "argumenty nie potrzebne",
+    "hidden": false,
+    "argsWzor": "No args needed",
     "aliases": [],
     run(message, args, client) {
         message.reply('Debilu pisze się ping dzbanie');

@@ -6,6 +6,7 @@ module.exports = {
     "name": "yoink",
     "description": "You can basicly STEAL emotes es?",
     "args": true,
+    "hidden": false,
     "argsWzor": "<emote or ID> <gif(if it has to be a gif)>",
     "aliases": ["jumbo", "kradziez", "thief", "steal"],
     run(message, args, client) {

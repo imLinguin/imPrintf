@@ -1,8 +1,9 @@
 module.exports = {
     "name": "info",
-    "description": "wyświetla informacje o bocie",
+    "description": "Cool things about bot's author",
     "args": false,
-    "argsWzor": 'argumenty nie potrzebne',
+    "hidden": false,
+    "argsWzor": 'No args needed',
     "aliases": ["i"],
 
     run(message, args, client) {

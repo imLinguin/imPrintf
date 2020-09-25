@@ -7,9 +7,10 @@ const {
 } = require('discord.js');
 module.exports = {
     "name": "gif",
-    "description": "daje gify",
+    "description": "Sends gifs",
     "args": true,
-    "argsWzor": "<trending/random/search/info> <fraza(jeśli_search)>",
+    "hidden": false,
+    "argsWzor": "<trending/random/search/info> <search phrase(if search)>",
     "aliases": ["fig"],
 
     run(message, args, client) {

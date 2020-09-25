@@ -4,10 +4,11 @@ const {
 
 module.exports = {
     "name": "kula",
-    "description": "kula jeść kula pić",
+    "description": "Cool easter egg",
     "args": true,
-    "argsWzor": "<czynność>",
-    "aliases": ["marcinek"],
+    "hidden": true,
+    "argsWzor": "<activity>",
+    "aliases": ["dawidek"],
 
     run(message, args, client) {
         const jedzonko = new MessageAttachment('https://i.imgur.com/WUIYLMt.jpg');

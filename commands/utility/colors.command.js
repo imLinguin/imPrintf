@@ -1,8 +1,8 @@
 module.exports = {
     "name": "colors",
-    "description": "wyświetla dostępne kolorki",
+    "description": "Sends you some preety nice colors",
     "args": false,
-    "argsWzor": 'argumenty nie potrzebny',
+    "argsWzor": 'No args needed',
     "aliases": ["kolorki"],
 
     run(message, args, client) {

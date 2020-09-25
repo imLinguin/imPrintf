@@ -4,8 +4,9 @@ const {
 
 module.exports = {
     "name": "help",
-    "description": "Wyświetla dostępne komendy",
+    "description": "Shows you list of available commands",
     "args": false,
+    "hidden": false,
     "argsWzor": "🙃🙃 you are using this command right now 🙃🙃",
     "aliases": ["idk", "h"],
     run(message, args, client) {
@@ -13,11 +14,14 @@ module.exports = {
         if (!args[0]) {
             const embed = new MessageEmbed().setTitle(`COMMANDS`).setColor(0x0096ff)
             array.forEach(element => {
-                embed.addField(
-                    element.name,
-                    element.description,
-                    true
-                );
+                if (!element.hidden) {
+                    embed.addField(
+                        element.name,
+                        element.description,
+                        true
+                    );
+                }
+
             })
             embed.setFooter(`USE (help command_name for an example`)
 

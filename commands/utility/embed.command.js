@@ -4,9 +4,9 @@ const {
 const kolorki = require('../../kolorki.json');
 module.exports = {
   "name": "embed",
-  "description": "wyświetla co chcesz i kiedy chcesz",
+  "description": "Allows you to send embed. Cool usage in announcements. Replace spaces with _ thanks man!",
   "args": true,
-  "argsWzor": "<tytuł> <kolor> <tekst>",
+  "argsWzor": "<title> <color> <bottom_text>",
   "aliases": ["emb"],
 
   run(message, args, client) {

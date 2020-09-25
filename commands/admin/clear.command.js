@@ -1,7 +1,8 @@
 module.exports = {
     "name": "clear",
-    "description": "Czyści określoną liczbę wiadomości",
+    "description": "Clears specific amount of messages max is 100. I'll try to hack it.",
     "args": true,
+    "hidden": false,
     "argsWzor": "<liczba>",
     "aliases": ["cc"],
     run(message, args, client) {

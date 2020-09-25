@@ -3,6 +3,7 @@ module.exports = {
   "name": "poll",
   "description": "You can easly create polls",
   "args": true,
+  "hidden": false,
   "argsWzor": "<title> <color> <text>",
   "aliases": ["glosowanie", "vote", "pl"],
 
@@ -60,6 +61,6 @@ function GiveColor(msg, arg) {
       return kolorki.colors[l].code;
     }
   }
-  msg.reply('Chyba nie mam takiego koloru sprawdź komendę (colors');
+  msg.reply('Bro, I didn\'t found that color. Check command colors');
   return 0;
 }

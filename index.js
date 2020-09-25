@@ -1,10 +1,17 @@
 const Discord = require('discord.js');
-const dotenv = require('dotenv').config();
+require('dotenv').config();
 const fs = require('fs');
-
-const PREFIX = '(';
+//const mongoose = require(`mongoose`);
+const PREFIX = 'b(';
 
 const client = new Discord.Client();
+
+/*mongoose.connect(`mongodb+srv://Bot:${process.env.dbpass}@discordbot.xhsms.mongodb.net/guildsetings?retryWrites=true&w=majority`, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+})
+*/
+
 client.on('ready', () => {
   console.log(`Zalogowano jako ${client.user.tag}`);
   client.user.setStatus('available')
@@ -69,7 +76,7 @@ client.on('message', msg => {
   }
 });
 
-client.login(process.env.token);
+client.login(process.env.betaTOKEN);
 client.on('error', error => {
   console.error(error)
   client.stopTyping()

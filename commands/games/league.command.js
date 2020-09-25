@@ -37,6 +37,7 @@ module.exports = {
     "name": "league",
     "description": "League of Legends statistics and more...",
     "args": true,
+    "hidden": false,
     "argsWzor": '<stats> <name>',
     "aliases": ["lol", "liga"],
 
