@@ -76,7 +76,7 @@ client.on('message', msg => {
   }
 });
 
-client.login(process.env.betaTOKEN);
+client.login(process.env.TOKEN);
 client.on('error', error => {
   console.error(error)
   client.stopTyping()
