@@ -4,7 +4,7 @@ const {
 
 module.exports = {
     "name": "kick",
-    "description": "Allows you to ban people",
+    "description": "Allows you to kick people",
     "hidden": false,
     "args": true,
     "argsWzor": '<member> <reason>',

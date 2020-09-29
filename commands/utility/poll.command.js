@@ -1,7 +1,7 @@
 const kolorki = require('../../kolorki.json');
 module.exports = {
   "name": "poll",
-  "description": "You can easly create polls",
+  "description": "You can easly create polls. Use _ instead of spaces in title and text field",
   "args": true,
   "hidden": false,
   "argsWzor": "<title> <color> <text>",
@@ -16,7 +16,7 @@ module.exports = {
 
 
     if (!args[0] || !args[1] || !args[2]) {
-      message.reply("Błąd!").then(message => {
+      message.reply("You didn't provided required amount of arguments.").then(message => {
         message.delete({
           timeout: 2000
         })

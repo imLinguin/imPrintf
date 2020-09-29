@@ -9,7 +9,7 @@ module.exports = {
         if (!isNaN(args[0])) {
             if (message.member.hasPermission('MANAGE_MESSAGES')) {
                 if (message.guild.me.hasPermission('MANAGE_MESSAGES')) {
-                    message.channel.bulkDelete(args[0]).then(messages => {
+                    message.channel.bulkDelete(args[0], true).then(messages => {
                         message.channel.send(`✅ Usunięto ${messages.size} wiadomości`).then(mzg => {
                             mzg.delete({
                                 timeout: 5000
