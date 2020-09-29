@@ -6,7 +6,7 @@ const PREFIX = '(';
 
 const client = new Discord.Client();
 
-/*mongoose.connect(`mongodb+srv://Bot:${process.env.dbpass}@discordbot.xhsms.mongodb.net/guildsetings?retryWrites=true&w=majority`, {
+/*mongoose.connect(`mongodb+srv://Bot:${process.env.dbpass}@discordbot.xhsms.mongodb.net/guilds?retryWrites=true&w=majority`, {
   useNewUrlParser: true,
   useUnifiedTopology: true
 })
@@ -17,7 +17,7 @@ client.on('ready', () => {
   client.user.setStatus('available')
 
   const updateInterval = setInterval(() => {
-    client.user.setActivity(`Prefix: ( | Serwery: ${client.guilds.cache.size}`, {
+    client.user.setActivity(`Prefix: ( | Serwers: ${client.guilds.cache.size}`, {
       type: 'WATCHING'
     });
   }, 120000)
@@ -49,10 +49,9 @@ Folders.forEach(folder => {
 
 })
 
-client.on('message', msg => {
-  //SearchForBadWord(message);
+client.on('message', message => {
 
-  const message = msg || msg.newMessage
+
   if (!message.content.startsWith(PREFIX) || message.author.bot) {
     return;
   }
@@ -85,20 +84,3 @@ client.on('warn', error => {
   console.warn(warn)
   client.stopTyping()
 });
-
-function SearchForBadWord(mzg) {
-  if (mzg.content.search('debil') >= 0 || mzg.content.search('śmiec') >= 0) {
-    mzg.channel.send(`Kto przezywa ten się tak sam nazywa ${mzg.author.tag}`);
-
-    if (mzg.guild.me.permissionsIn(mzg.channel).has('MANAGE_NICKNAMES')) {
-      mzg.guild.member(mzg.author).setNickname('debil', "przezywanie ludzi").catch(err => {})
-    } else {
-      mzg.channel.send("Nie mam uprawnień do zmiany nicków").then(y => {
-        y.delete({
-          timeout: 2000
-        })
-      })
-
-    }
-  }
-}

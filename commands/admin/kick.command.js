@@ -3,26 +3,24 @@ const {
 } = require("discord.js");
 
 module.exports = {
-    "name": "ban",
+    "name": "kick",
     "description": "Allows you to ban people",
     "hidden": false,
     "args": true,
     "argsWzor": '<member> <reason>',
-    "aliases": [""],
+    "aliases": ["k", "wyjeb", "remove"],
 
     run(message, args, client) {
 
         const member = message.mentions.members.first();
         args.shift()
         const reason = args.join(` `);
-        if (message.member.hasPermission(`BAN_MEMBERS`)) {
-            if (message.guild.me.hasPermission(`BAN_MEMBERS`)) {
+        if (message.member.hasPermission(`KICK_MEMBERS`)) {
+            if (message.guild.me.hasPermission(`KICK_MEMBERS`)) {
                 try {
-                    member.ban({
-                        reason: reason,
-                    })
+                    member.kick(reason)
                     const embed = {
-                        title: `Succesfully banned ${member.user.tag}`,
+                        title: `Succesfully kicked ${member.user.tag}`,
                         footer: {
                             text: `Reason: ${reason}`
                         },
@@ -34,7 +32,7 @@ module.exports = {
                         embed: embed
                     })
                 } catch {
-                    return message.channel.send(`I couldn't ban ${member.user.tag}`)
+                    return message.channel.send(`I couldn't kick ${member.user.tag}`)
                 }
 
             }

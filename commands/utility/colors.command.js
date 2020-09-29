@@ -6,7 +6,7 @@ module.exports = {
     "aliases": ["kolorki"],
 
     run(message, args, client) {
-        const kolorki = require('../kolorki.json')
+        const kolorki = require('../../kolorki.json')
         message.reply("Sprawdź dm :)").then(msg => {
             msg.delete({
                 timeout: 2000
