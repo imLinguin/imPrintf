@@ -18,7 +18,7 @@ module.exports = {
             emojiID = args[0].substring(emojiPos + 1)
             emojiID = emojiID.substring(0, emojiID.length - 1);
             if (args[0].startsWith('<a:')) {
-                console.log(args[1])
+
                 animated = true;
             } else {
                 animated = false;
@@ -26,7 +26,7 @@ module.exports = {
         } else {
             const numbers = new RegExp("^[0-9]+$")
             if (!numbers.test(args[0])) {
-                return message.channel.send(`Musisz podać emotkę lub ID emotki`)
+                return message.channel.send(`You have to provide valid emoji ID or emoji like this: <a:chicken:752540562279628810>`)
             }
             if (args[1] === "gif") {
                 animated = true;

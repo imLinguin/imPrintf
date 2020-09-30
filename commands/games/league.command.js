@@ -23,6 +23,7 @@ const init = async () => {
 }
 
 const getChamps = setInterval(async () => {
+    init();
     champions = await fetch(`http://ddragon.leagueoflegends.com/cdn/${version}/data/en_US/champion.json`).then(res => {
         return res
     }).then(json => {
@@ -38,13 +39,14 @@ module.exports = {
     "description": "League of Legends statistics and more...",
     "args": true,
     "hidden": false,
-    "argsWzor": '<stats> <name>',
+    "argsWzor": '<stats/rotations> <name>',
     "aliases": ["lol", "liga"],
 
     async run(message, args, client) {
 
         switch (args[0]) {
             case "stats":
+            case "s":
 
                 if (!args[1]) {
                     return message.reply(`You need to provide your League of Legends nick!`)
@@ -89,6 +91,58 @@ module.exports = {
                     files: [avatar],
                     embed: embed
                 })
+                break;
+            case "rotation":
+            case "rot":
+            case "r":
+                const rotationData = await fetch(`https://eun1.api.riotgames.com/lol/platform/v3/champion-rotations?api_key=${process.env.riotKey}`).then(res => {
+                    return res.json()
+                });
+                if (rotationData) {
+
+                    championList = champions.data;
+                    let freeChampions = [];
+                    let freeChampionsNewPNames = [];
+                    for (var i in rotationData.freeChampionIds) {
+                        for (var y in championList)
+                            if (championList[y].key.startsWith(rotationData.freeChampionIds[i])) {
+                                freeChampions.push(championList[y].name);
+                            }
+                    }
+                    freeChampions.join(`\n`)
+                    for (var i in rotationData.freeChampionIdsForNewPlayers) {
+                        for (var y in championList)
+                            if (championList[y].key.startsWith(rotationData.freeChampionIdsForNewPlayers[i])) {
+                                freeChampionsNewPNames.push(championList[y].name)
+                            }
+                    }
+                    freeChampionsNewPNames.join('\n')
+                    let embed = {
+                        color: 0x095ff,
+                        title: `Today's champion rotations are`,
+                        fields: [{
+                                name: `For everyone`,
+                                value: freeChampions,
+                                inline: true,
+                            },
+                            {
+                                name: `For new players`,
+                                value: freeChampionsNewPNames,
+                                inline: true
+                            }
+                        ],
+                        footer: {
+                            text: `Max new player level: ${rotationData.maxNewPlayerLevel}`,
+                            icon_url: `http://vignette4.wikia.nocookie.net/roblox/images/0/05/Noob_character.png/`,
+                        },
+                    }
+                    return message.channel.send({
+                        embed: embed
+                    })
+                } else {
+                    return message.reply(`I couldn't fetch data from riot servers!`)
+                }
+
                 break;
         }
     }
