@@ -52,13 +52,24 @@ module.exports = {
 const listRoles = (user) => {
     const roles = user.roles.cache.array();
     const list = []
-
+    const stringList = [];
     for (var i in roles) {
-        if (roles[i].name !== '@everyone')
-            list.push(`<@&${roles[i].id}>`)
-    }
+        if (roles[i].name !== '@everyone') {
+            const object = {
+                id: `<@&${roles[i].id}>`,
+                pos: roles[i].position,
+            }
+            list.push(object);
+        }
 
-    list.join('\n');
-    return list;
+    }
+    list.sort((a, b) => {
+        a.pos - b.pos
+    })
+    list.forEach(object => {
+        stringList.push(object.id)
+    })
+    stringList.join('\n');
+    return stringList;
 
 }

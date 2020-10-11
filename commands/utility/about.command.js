@@ -12,7 +12,7 @@ module.exports = {
             title: `About`,
             fields: [{
                 name: `\u200B`,
-                value: "Programmer: **Linguin**\nDesigner **olboy**, Ideas **~~GaVeX~~**, Bot tester: [**xTKEYY**](https://www.discord.io/tykeyacze 'His server')"
+                value: "Programmer: **Linguin**\nDesigner **olboy**, Ideas **~~GaVeX~~**, Bot tester: **[xTKEYY](https://www.discord.io/tykeyacze 'His server')**"
             }]
         }
         message.channel.send({

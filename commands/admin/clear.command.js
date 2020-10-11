@@ -19,13 +19,13 @@ module.exports = {
 
 
                 } else {
-                    message.reply("Nie mam uprawnień, potrzebne uprawnienia to Zarządzanie Wiadomościami")
+                    message.reply("I need manage messanges permission")
                 }
             } else {
-                message.reply('Nie masz uprawnień')
+                message.reply('You are not allowed to use that command!')
             }
         } else {
-            message.reply('Musisz podać liczbę');
+            message.reply('You have to pass a number');
         }
     }
 }

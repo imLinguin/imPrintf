@@ -16,7 +16,7 @@ module.exports = {
         args.shift()
         const reason = args.join(` `);
         if (message.member.hasPermission(`KICK_MEMBERS`)) {
-            if (message.guild.me.hasPermission(`KICK_MEMBERS`)) {
+            if (message.guild.me.hasPermission(`KICK_MEMBERS`) && member.kickable) {
                 try {
                     member.kick(reason)
                     const embed = {
@@ -36,6 +36,11 @@ module.exports = {
                 }
 
             }
+            else{
+                message.channel.send('I can\'t kick that user! Check my permissions or role hierarchy.')
+            }
+        }else {
+            message.reply('You don\'t have permission to use that command!');
         }
     }
 }

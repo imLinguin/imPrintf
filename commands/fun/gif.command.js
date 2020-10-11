@@ -74,12 +74,9 @@ async function Search(msg, arg) {
     let tem = arg;
     let tem2 = '';
     tem.shift();
-    tem2 = tem.join('%20');
+    tem2 = encodeURIComponent(tem);
 
-    if (tem2.indexOf('ą') != -1 || tem2.indexOf('ć') != -1 || tem2.indexOf('ź') != -1 || tem2.indexOf('ż') != -1 || tem2.indexOf('ó') != -1 || tem2.indexOf('ę') != -1 || tem2.indexOf('ś') != -1 || tem2.indexOf('ń') != -1 || tem2.indexOf('ł') != -1) {
-        msg.reply("Wyszukiwanie nie może zawierać polskich znaków bo przeglądarka wybucha NotLikeThis");
-        return;
-    }
+
     const url = `https://api.tenor.com/v1/search?key=V37IT23T7QBQ&q=${tem2}&locale=pl_PL&limit=20`
     await fetch(url).then(res => {
         return res.json()

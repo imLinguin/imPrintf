@@ -16,7 +16,7 @@ module.exports = {
         args.shift()
         const reason = args.join(` `);
         if (message.member.hasPermission(`BAN_MEMBERS`)) {
-            if (message.guild.me.hasPermission(`BAN_MEMBERS`)) {
+            if (message.guild.me.hasPermission(`BAN_MEMBERS`) && member.bannable) {
                 try {
                     member.ban({
                         reason: reason,
@@ -38,6 +38,11 @@ module.exports = {
                 }
 
             }
+            else{
+                message.channel.send('I can\'t ban that user! Check my permissions or role hierarchy.')
+            }
+        }else {
+            message.reply('You don\'t have permission to use that command!');
         }
     }
 }

@@ -40,7 +40,7 @@ Folders.forEach(folder => {
 
   const Files = fs.readdirSync(`./commands/${folder.toString()}`).filter(file => file.endsWith(`command.js`))
   Files.forEach(command => {
-    comand = require(`./commands/${folder}/${command}`)
+    const comand = require(`./commands/${folder}/${command}`)
 
     if (comand.name) {
       client.commands.set(comand.name, comand)
