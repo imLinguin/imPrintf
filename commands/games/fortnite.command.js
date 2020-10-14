@@ -7,7 +7,7 @@ require("dotenv").config()
 const fortniteAPI = new FortniteAPI(process.env.ftapi)
 module.exports = {
     "name": "fortnite",
-    "description": "Fortnite related commands. Btw if your nick has space in it feel free to type it as it is!",
+    "description": "Fortnite related commands. Spaces in nicks are welcome",
     "args": true,
     "hidden": false,
     "argsWzor": "<map/stats/server> <nick>",
