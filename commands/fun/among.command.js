@@ -9,7 +9,7 @@ module.exports = {
     run(message, args, client) {
         
         const random = Math.random();
-        const nick = message.mentions.users.first().username || args[0]
+        const nick = message.mentions.users.first() ? message.mentions.users.first() : args[0]
         if(random > 0.5)
         {   
             message.channel.send(`. 　　　。　　　　•　 　ﾟ　　。 　　.\n\n　　　.　　　 　　.　　　　　。　　 。　. 　\n\n.　　 。　　　　　 ඞ 。 . 　　 • 　　　\n　　ﾟ　　 ${nick} was An Impostor.　 。　.\n\n　　'　　　 1 Impostor remains 　 　　。\n\n　　ﾟ　　　.　　　. ,　　　　.　 .`)
