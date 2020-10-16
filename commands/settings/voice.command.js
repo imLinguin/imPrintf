@@ -80,7 +80,7 @@ module.exports = {
       case "template":
       case "title":
         args.shift();
-        if (!args[1])
+        if (!args[0])
           return message.reply(
             `You have to specify a title of channels that I'll create`
           );
@@ -91,9 +91,6 @@ module.exports = {
           { VCTemplate: title }
         );
         message.react("764459481303875584");
-        break;
-      default:
-        console.log(guildConfig.voiceChannels);
         break;
     }
   },
