@@ -23,7 +23,7 @@ module.exports = async (client, oldState, newState) => {
   if (oldState.channel === newState.channel) return;
 
   const config = await Guild.findOne({ guildId: guild.id });
-  if (!config.voiceChannels) return;
+  if (!config || !config.voiceChannels) return;
   let chname = config.VCTemplate;
   if (!order.has(guild.id)) order.set(guild.id, 1);
 
