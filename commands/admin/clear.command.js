@@ -10,7 +10,7 @@ module.exports = {
             if (message.member.hasPermission('MANAGE_MESSAGES')) {
                 if (message.guild.me.hasPermission('MANAGE_MESSAGES')) {
                     message.channel.bulkDelete(args[0], true).then(messages => {
-                        message.channel.send(`✅ Usunięto ${messages.size} wiadomości`).then(mzg => {
+                        message.channel.send(`✅ I deleted ${messages.size} messages!`).then(mzg => {
                             mzg.delete({
                                 timeout: 5000
                             })
@@ -19,7 +19,7 @@ module.exports = {
 
 
                 } else {
-                    message.reply("I need manage messanges permission")
+                    message.reply("I need manage messages permission!")
                 }
             } else {
                 message.reply('You are not allowed to use that command!')
