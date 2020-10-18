@@ -9,7 +9,7 @@ module.exports = async (client, oldState, newState) => {
     let ch = await newState.guild.channels.resolve(channelId);
     if (ch)
       if ((await ch.type) === "voice" && ch.members.array().length <= 0) {
-        ch.delete(`Channel empty > Auto create channels`);
+        await ch.delete(`Channel empty > Auto create channels`);
         order.set(guild.id, order.get(guild.id) - 1);
         let temp = channelsToCheck.get(guild.id);
         for (j = 0; j < temp.length; j++) {
@@ -19,14 +19,13 @@ module.exports = async (client, oldState, newState) => {
         }
       }
   }
-
+  if (newState.channel === null) return;
   if (oldState.channel === newState.channel) return;
 
   const config = await Guild.findOne({ guildId: guild.id });
   if (!config || !config.voiceChannels) return;
   let chname = config.VCTemplate;
   if (!order.has(guild.id)) order.set(guild.id, 1);
-
   chname = chname.replace("%USER%", newState.member.user.username);
   chname = chname.replace("%NUMBER%", `#${order.get(guild.id)}`);
   chname = chname.replace(
@@ -50,9 +49,9 @@ module.exports = async (client, oldState, newState) => {
             ? channelsToCheck.get(guild.id)
             : [];
           temp.push(c.id);
-          channelsToCheck.set(guild.id, temp);
           order.set(guild.id, order.get(guild.id) + 1);
           newState.setChannel(c, `Auto created channel`);
+          channelsToCheck.set(guild.id, temp);
         });
     }
   }

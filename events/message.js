@@ -1,6 +1,7 @@
 const Guild = require("../database/schemas/GuildSettings.js");
 const mongoose = require("mongoose");
 module.exports = async (client, message) => {
+  if (!message.guild) return;
   let PREFIX;
   let config = await Guild.findOne({ guildId: message.guild.id });
   config ? (PREFIX = config.prefix) : (PREFIX = "(");

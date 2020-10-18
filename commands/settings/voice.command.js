@@ -5,7 +5,7 @@ module.exports = {
   description: "Temporar voice channels related settings!",
   args: true,
   hidden: false,
-  argsWzor: "<category/create/title> <add/delete/ID>",
+  argsWzor: "<category/channel/title> <add/delete/ID>",
   aliases: ["vc"],
 
   async run(message, args, client) {
@@ -33,6 +33,7 @@ module.exports = {
 
         break;
       case "create":
+      case "channel":
       case "cr":
         switch (args[1]) {
           case "add":
@@ -42,6 +43,12 @@ module.exports = {
               );
             if (!message.guild.channels.cache.get(args[2]))
               return message.channel.send(`ID is invalid`);
+
+            for (channel of channels) {
+              if (channel === args[2])
+                return message.channel.send("That channel is already added!");
+            }
+
             channels.push(args[2]);
             await Guild.updateOne(
               { guildId: message.guild.id },
@@ -71,7 +78,7 @@ module.exports = {
 
           default:
             return message.channel.send(
-              `Somenthing is not ok. Template: **${guildConfig.prefix}voice create add/delete __CHANNEL_ID__**`
+              `Somenthing is not ok. Template: **${guildConfig.prefix}voice channel add/delete __CHANNEL_ID__**`
             );
             break;
         }
@@ -91,6 +98,11 @@ module.exports = {
           { VCTemplate: title }
         );
         message.react("764459481303875584");
+        break;
+      default:
+        message.channel.send(
+          `You forgot something **${guildConfig.prefix}voice <category/channel/title> <add/delete/ID>**`
+        );
         break;
     }
   },
