@@ -37,11 +37,13 @@ module.exports = async (client, oldState, newState) => {
 
   for (voiceChannel of config.voiceChannels) {
     if (newState.channelID === voiceChannel) {
+      let resolved = await newState.guild.channels.resolve(voiceChannel);
       guild.channels
         .create(chname, {
           type: "voice",
           parent: config.createdCategory,
           reason: `Auto create channels`,
+          userLimit: resolved.userLimit,
         })
         .then(async (c) => {
           let temp = [];
