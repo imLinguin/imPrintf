@@ -5,7 +5,7 @@ module.exports = {
   description: "Temporar voice channels related settings!",
   args: true,
   hidden: false,
-  argsWzor: "<category/channel/title> <add/delete/ID>",
+  argsWzor: "<category/channel/title/nogame> <add/delete/ID/title>",
   aliases: ["vc"],
 
   async run(message, args, client) {
@@ -96,6 +96,20 @@ module.exports = {
         await Guild.updateOne(
           { guildId: message.guild.id },
           { VCTemplate: title }
+        );
+        message.react("764459481303875584");
+        break;
+      case "no-game":
+      case "nogame":
+        args.shift();
+        if (!args[0])
+          return message.reply(
+            `You have to specify a text when user is not in game`
+          );
+        const nogametitle = args.join(" ");
+        await Guild.updateOne(
+          { guildId: message.guild.id },
+          { noGame: nogametitle }
         );
         message.react("764459481303875584");
         break;

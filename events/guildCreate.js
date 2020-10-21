@@ -8,6 +8,7 @@ module.exports = (client, guild) => {
     voiceChannels: [],
     autoRoles: [],
     createdCategory: null,
+    noGame: "NO GAME",
     VCTemplate: "Temporar channel %NUMBER%",
     prefix: "(",
   });

@@ -21,6 +21,7 @@ module.exports = {
       voiceChannels: [],
       autoRoles: [],
       createdCategory: null,
+      noGame: "NO GAME",
       VCTemplate: "%USER%'s channel",
       prefix: "(",
     });

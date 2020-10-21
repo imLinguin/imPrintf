@@ -32,7 +32,7 @@ module.exports = async (client, oldState, newState) => {
     "%GAME%",
     newState.member.user.presence.activities[0]
       ? newState.member.user.presence.activities[0].name
-      : "NO GAME"
+      : config.noGame
   );
 
   for (voiceChannel of config.voiceChannels) {

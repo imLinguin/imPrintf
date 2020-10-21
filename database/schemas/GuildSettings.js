@@ -7,6 +7,7 @@ const GuildSchema = mongoose.Schema({
   voiceChannels: Array,
   autoRoles: Array,
   createdCategory: String,
+  noGame: String,
   VCTemplate: String,
   prefix: String,
 });
