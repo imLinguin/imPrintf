@@ -1,5 +1,5 @@
 const Discord = require("discord.js");
-require("dotenv").config();
+require("dotenv").config({ path: __dirname + "/.env" });
 const fs = require("fs");
 const mongoose = require(`mongoose`);
 const client = new Discord.Client();

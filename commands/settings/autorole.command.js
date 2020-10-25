@@ -15,6 +15,7 @@ module.exports = {
         return message.reply(`First I need **MANAGE_ROLES** permission`);
       let config = await Guild.findOne({ guildId: message.guild.id });
       let roles = config.autoRoles;
+      let roleObj = message.guild.roles.cache.get(args[1]);
       switch (args[0]) {
         case "add":
         case "create":
@@ -22,6 +23,26 @@ module.exports = {
             return message.channel.send(`You need to specify role ID`);
           if (!message.guild.roles.cache.get(args[1]))
             return message.channel.send(`ID is invalid`);
+
+          for (role of roles) {
+            if (role === args[1])
+              return message.channel.send(
+                "This role is already saved to my config!"
+              );
+          }
+          let valid = true;
+          for (role of message.guild.me.roles.cache.array()) {
+            if (roleObj.comparePositionTo(role) >= 0) {
+              valid = false;
+            } else {
+              valid = true;
+              break;
+            }
+          }
+          if (valid === false)
+            return message.channel.send(
+              "❌ I can't manage this role make sure to put my role higher in hierarchy!"
+            );
           roles.push(args[1]);
           await config.updateOne({ autoRoles: roles });
           message.react("764459481303875584");
@@ -32,11 +53,13 @@ module.exports = {
             return message.channel.send(`You need to specify role ID`);
           if (!message.guild.roles.cache.get(args[1]))
             return message.channel.send(`ID is invalid`);
+
           for (i = 0; i < roles.length; i++) {
-            if (roles[i] === args[2]) {
+            if (roles[i] === args[1]) {
               roles.splice(i, 1);
             }
           }
+
           await config.updateOne({ autoRoles: roles });
           message.react("764459481303875584");
           break;
