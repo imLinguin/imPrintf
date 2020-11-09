@@ -1,5 +1,4 @@
 const { MessageAttachment } = require("discord.js");
-const { opacity } = require("jimp");
 const Jimp = require("jimp");
 module.exports = {
   name: "kissorslap",

@@ -5,7 +5,7 @@ module.exports = {
   description: "Temporar voice channels related settings!",
   args: true,
   hidden: false,
-  argsWzor: "<category/channel/title/nogame> <add/delete/ID/title>",
+  argsWzor: "<category/channel/nogame> <add/delete/ID> <new channel title>",
   aliases: ["vc"],
 
   async run(message, args, client) {
@@ -35,21 +35,33 @@ module.exports = {
       case "create":
       case "channel":
       case "cr":
+        console.log(args);
         switch (args[1]) {
           case "add":
             if (!args[2])
               return message.channel.send(
                 `You need to specify voice channel ID`
               );
+            let text = args;
+            if (!text)
+              return message.channel.send(
+                `You need to specify text for new channel`
+              );
             if (!message.guild.channels.cache.get(args[2]))
               return message.channel.send(`ID is invalid`);
 
             for (channel of channels) {
-              if (channel === args[2])
+              if (channel && channel.id === args[2])
                 return message.channel.send("That channel is already added!");
             }
-
-            channels.push(args[2]);
+            let id = args[2];
+            text.splice(0, 3);
+            text = text.join(" ");
+            channelObj = {
+              id: id,
+              text: text,
+            };
+            channels.push(channelObj);
             await Guild.updateOne(
               { guildId: message.guild.id },
               { voiceChannels: channels }
@@ -65,7 +77,7 @@ module.exports = {
             if (!message.guild.channels.cache.get(args[2]))
               return message.channel.send(`ID is invalid`);
             for (i = 0; i < channels.length; i++) {
-              if (channels[i] === args[2]) {
+              if (channels[i].id === args[2]) {
                 channels.splice(i, 1);
               }
             }
@@ -78,26 +90,11 @@ module.exports = {
 
           default:
             return message.channel.send(
-              `Somenthing is not ok. Template: **${guildConfig.prefix}voice channel add/delete __CHANNEL_ID__**`
+              `Somenthing is not ok. Template: **${guildConfig.prefix}voice channel add/delete __CHANNEL_ID__ __channel title__**`
             );
             break;
         }
 
-        break;
-      case "template":
-      case "title":
-        args.shift();
-        if (!args[0])
-          return message.reply(
-            `You have to specify a title of channels that I'll create`
-          );
-        const title = args.join(" ");
-
-        await Guild.updateOne(
-          { guildId: message.guild.id },
-          { VCTemplate: title }
-        );
-        message.react("764459481303875584");
         break;
       case "no-game":
       case "nogame":

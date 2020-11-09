@@ -22,7 +22,6 @@ module.exports = {
       autoRoles: [],
       createdCategory: null,
       noGame: "NO GAME",
-      VCTemplate: "%USER%'s channel",
       prefix: "(",
     });
     guildToSave.save();

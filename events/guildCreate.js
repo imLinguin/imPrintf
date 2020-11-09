@@ -9,7 +9,6 @@ module.exports = (client, guild) => {
     autoRoles: [],
     createdCategory: null,
     noGame: "NO GAME",
-    VCTemplate: "Temporar channel %NUMBER%",
     prefix: "(",
   });
   guildToSave.save();

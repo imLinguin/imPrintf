@@ -24,20 +24,20 @@ module.exports = async (client, oldState, newState) => {
 
   const config = await Guild.findOne({ guildId: guild.id });
   if (!config || !config.voiceChannels) return;
-  let chname = config.VCTemplate;
-  if (!order.has(guild.id)) order.set(guild.id, 1);
-  chname = chname.replace("%USER%", newState.member.user.username);
-  chname = chname.replace("%NUMBER%", `#${order.get(guild.id)}`);
-  chname = chname.replace(
-    "%GAME%",
-    newState.member.user.presence.activities[0]
-      ? newState.member.user.presence.activities[0].name
-      : config.noGame
-  );
 
   for (voiceChannel of config.voiceChannels) {
-    if (newState.channelID === voiceChannel) {
-      let resolved = await newState.guild.channels.resolve(voiceChannel);
+    if (newState.channelID === voiceChannel.id) {
+      let resolved = await newState.guild.channels.resolve(voiceChannel.id);
+      let chname = voiceChannel.text;
+      if (!order.has(guild.id)) order.set(guild.id, 1);
+      chname = chname.replace("%USER%", newState.member.user.username);
+      chname = chname.replace("%NUMBER%", `${order.get(guild.id)}`);
+      chname = chname.replace(
+        "%GAME%",
+        newState.member.user.presence.activities[0]
+          ? newState.member.user.presence.activities[0].name
+          : config.noGame
+      );
       guild.channels
         .create(chname, {
           type: "voice",
