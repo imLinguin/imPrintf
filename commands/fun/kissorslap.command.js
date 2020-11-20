@@ -10,8 +10,9 @@ module.exports = {
 
   async run(message, args, client) {
     const random = Math.random();
+    const target = message.mentions.users.first() || message.author;
     const avatar = await Jimp.read(
-      message.author.displayAvatarURL({
+      target.displayAvatarURL({
         dynamic: false,
         format: "png",
         size: 256,

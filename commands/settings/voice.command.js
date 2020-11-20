@@ -35,7 +35,6 @@ module.exports = {
       case "create":
       case "channel":
       case "cr":
-        console.log(args);
         switch (args[1]) {
           case "add":
             if (!args[2])
