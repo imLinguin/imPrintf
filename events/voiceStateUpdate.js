@@ -44,6 +44,7 @@ module.exports = async (client, oldState, newState) => {
           parent: config.createdCategory,
           reason: `Auto create channels`,
           userLimit: resolved.userLimit,
+          bitrate: resolved.bitrate,
         })
         .then(async (c) => {
           let temp = [];

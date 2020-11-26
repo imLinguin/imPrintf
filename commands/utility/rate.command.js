@@ -7,6 +7,14 @@ module.exports = {
   argsWzor: "<messageId(samechannel)/link(everyChannel)>",
   aliases: ["vote"],
   async run(message, args, client) {
+    if (
+      !message.member.hasPermisson("MANAGE_MESSAGES", {
+        checkOwner: true,
+        checkAdmin: true,
+      })
+    ) {
+      return message.channel.send("❌ You aren't allowed to do that");
+    }
     let link = args.join(" ");
     let isRegex = linkRegex.test(args.join(" "));
     try {
