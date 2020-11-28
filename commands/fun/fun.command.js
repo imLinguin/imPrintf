@@ -6,7 +6,7 @@ module.exports = {
   description: "Do a lot of things with your friends",
   args: true,
   hidden: false,
-  argsWzor: "<slap/kick/communism> <target(user)>",
+  argsWzor: "<slap/kick/kill/communism> <target(user)>",
   aliases: ["meme"],
 
   async run(message, args, client) {
@@ -47,6 +47,20 @@ module.exports = {
         targetImg.resize(50, 50).circle({ radius: 50 / 2 });
         base.composite(authorImg, 343, 2);
         base.composite(targetImg, 150, 29);
+        buffer = await base.getBufferAsync(Jimp.MIME_PNG);
+        attachment = new MessageAttachment(buffer, "meme.png");
+        await message.channel.send(
+          `${message.author} ${phrase} ${target}`,
+          attachment
+        );
+        break;
+      case "kill":
+        base = await Jimp.read(memesPath + "kill.png");
+        phrase = "killed";
+        authorImg.resize(65, 65).circle({ radius: 65 / 2 });
+        targetImg.resize(60, 60).circle({ radius: 60 / 2 });
+        base.composite(authorImg, 100, 145);
+        base.composite(targetImg, 280, 170);
         buffer = await base.getBufferAsync(Jimp.MIME_PNG);
         attachment = new MessageAttachment(buffer, "meme.png");
         await message.channel.send(

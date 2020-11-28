@@ -6,7 +6,7 @@ module.exports = {
   args: false,
   hidden: false,
   argsWzor: "<nick>",
-  aliases: ["kos", "kiss", "slap"],
+  aliases: ["kos"],
 
   async run(message, args, client) {
     const random = Math.random();
