@@ -8,7 +8,6 @@ const GuildSchema = mongoose.Schema({
   autoRoles: Array,
   createdCategory: String,
   noGame: String,
-
   prefix: String,
 });
 

@@ -114,6 +114,64 @@ module.exports = {
           `You forgot something **${guildConfig.prefix}voice <category/channel/title> <add/delete/ID>**`
         );
         break;
+
+      case "list":
+        let configEmbed = {
+          color: 0x095ff,
+          title: `⚙ Config for ${message.guild.name}`,
+          fields: [
+            {
+              name: "Prefix",
+              value: `${guildConfig.prefix}`,
+              inline: true,
+            },
+            {
+              name: "VoiceChannels",
+              value: `${
+                guildConfig.voiceChannels
+                  ? resolveChannelNames(guildConfig.voiceChannels, message)
+                  : "Not Configured"
+              }`,
+              inline: true,
+            },
+            {
+              name: "VoiceChannels Category",
+              value: `${
+                guildConfig.createdCategory
+                  ? message.guild.channels.resolve(guildConfig.createdCategory)
+                      .name
+                  : "Not Configured"
+              }`,
+            },
+            {
+              name: "Autoroles",
+              value: `${
+                guildConfig.autoRoles[0]
+                  ? resolveRoleNames(guildConfig.autoRoles, message)
+                  : "Not Configured"
+              }`,
+              inline: true,
+            },
+          ],
+        };
+
+        message.channel.send({ embed: configEmbed });
+        break;
     }
   },
 };
+function resolveChannelNames(array, message) {
+  let outString = "";
+  for (element of array) {
+    outString += message.guild.channels.resolve(element.id).name + "\n";
+  }
+  return outString;
+}
+
+function resolveRoleNames(array, message) {
+  let outString1 = "";
+  for (element of array) {
+    outString1 += message.guild.roles.resolve(element).name + "\n";
+  }
+  return outString1;
+}

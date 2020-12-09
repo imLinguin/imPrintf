@@ -44,7 +44,7 @@ module.exports = {
           ID.account_id
         );
 
-        if (stats.result === true && stats.global_stats !== null) {
+        if (stats && stats.result === true && stats.global_stats !== null) {
           const embed = new MessageEmbed()
             .setTitle(
               `${stats.name}'s level: **${
