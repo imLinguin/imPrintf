@@ -6,7 +6,7 @@ module.exports = {
   description: "Do a lot of things with your friends",
   args: true,
   hidden: false,
-  argsWzor: "<slap/kick/kill/communism> <target(user)>",
+  argsWzor: "<slap/kick/kill/communism/pixel> <target(user)>",
   aliases: ["meme"],
 
   async run(message, args, client) {
@@ -91,6 +91,15 @@ module.exports = {
         targetImg.composite(base, 0, 0);
         buffer = await targetImg.getBufferAsync(Jimp.MIME_PNG);
 
+        return await message.channel.send(
+          new MessageAttachment(buffer, "communism.png")
+        );
+        break;
+      case "pixel":
+      case "pixelite":
+        targetImg.resize(512, 512);
+        targetImg.pixelate(20);
+        buffer = await targetImg.getBufferAsync(Jimp.MIME_PNG);
         return await message.channel.send(
           new MessageAttachment(buffer, "communism.png")
         );

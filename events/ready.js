@@ -3,7 +3,7 @@ module.exports = (client) => {
   client.user.setStatus("available");
 
   const updateInterval = setInterval(() => {
-    client.user.setActivity(`(help | Serwers: ${client.guilds.cache.size}`, {
+    client.user.setActivity(`(help | Servers: ${client.guilds.cache.size}`, {
       type: "WATCHING",
     });
   }, 120000);
