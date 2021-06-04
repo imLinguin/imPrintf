@@ -1,7 +1,24 @@
 const Guild = require("../database/schemas/GuildSettings.js");
 const mongoose = require("mongoose");
+const fs = require("fs");
+const path = require("path");
 let order = new Map();
 let channelsToCheck = new Map();
+
+const order_cache = JSON.parse(
+  fs.readFileSync(path.join(__dirname, ".order_cache"), reviver)
+);
+const vc_cache = JSON.parse(
+  fs.readFileSync(path.join(__dirname, ".vc_cache")),
+  reviver
+);
+
+if (order_cache) {
+  order = new Map(order_cache.value);
+}
+if (vc_cache) {
+  channelsToCheck = vc_cache;
+}
 module.exports = async (client, oldState, newState) => {
   let guild = newState.guild;
   let channelTable = channelsToCheck.get(guild.id) || [];
@@ -15,6 +32,11 @@ module.exports = async (client, oldState, newState) => {
         for (j = 0; j < temp.length; j++) {
           if (temp[j] === ch.id) {
             temp.splice(j, 1);
+            if (temp == []) {
+              channelsToCheck.delete(guild.id);
+              order.delete(guild.id);
+            }
+            saveCache();
           }
         }
       }
@@ -55,7 +77,41 @@ module.exports = async (client, oldState, newState) => {
           order.set(guild.id, order.get(guild.id) + 1);
           newState.setChannel(c, `Auto created channel`);
           channelsToCheck.set(guild.id, temp);
+          saveCache();
         });
     }
   }
 };
+
+function saveCache() {
+  fs.writeFileSync(
+    path.join(__dirname, ".vc_cache"),
+    JSON.stringify(channelsToCheck, replacer),
+    { encoding: "utf8" }
+  );
+  fs.writeFileSync(
+    path.join(__dirname, ".order_cache"),
+    JSON.stringify(order, replacer),
+    { encoding: "utf8" }
+  );
+}
+
+function replacer(key, value) {
+  if (value instanceof Map) {
+    return {
+      dataType: "Map",
+      value: Array.from(value.entries()), // or with spread: value: [...value]
+    };
+  } else {
+    return value;
+  }
+}
+
+function reviver(key, value) {
+  if (typeof value === "object" && value !== null) {
+    if (value.dataType === "Map") {
+      return new Map(value.value);
+    }
+  }
+  return value;
+}
