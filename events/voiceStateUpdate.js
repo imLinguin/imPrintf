@@ -20,6 +20,7 @@ if (vc_cache) {
   channelsToCheck = vc_cache;
 }
 module.exports = async (client, oldState, newState) => {
+  verifyCache(newState.guild)
   let guild = newState.guild;
   let channelTable = channelsToCheck.get(guild.id) || [];
   for (channelId of channelTable) {
@@ -32,7 +33,7 @@ module.exports = async (client, oldState, newState) => {
         for (j = 0; j < temp.length; j++) {
           if (temp[j] === ch.id) {
             temp.splice(j, 1);
-            if (temp == []) {
+            if (!temp) {
               channelsToCheck.delete(guild.id);
               order.delete(guild.id);
             }
@@ -94,6 +95,27 @@ function saveCache() {
     JSON.stringify(order, replacer),
     { encoding: "utf8" }
   );
+}
+
+
+function verifyCache(guild) {
+  let channels = channelsToCheck.get(guild.id)
+  for (channel in channels){
+    if(guild.available) {
+      if(!guild.channels.resolve(channels[channel]))
+      {
+        channels.splice(channel,1)
+        let number = order.get(guild.id)
+        number -= 1
+        if(number < 1) {
+          number = 1
+        }
+        order.set(guild.id, number) 
+      }
+    }
+  }
+  saveCache()
+
 }
 
 function replacer(key, value) {

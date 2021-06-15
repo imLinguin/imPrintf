@@ -17,7 +17,7 @@
     "fortnite-api-io": "^1.9.0",
     "genius-lyrics": "^4.2.9",
     "jimp": "^0.16.1",
-    "mongoose": "^5.12.12",
+    "mongoose": "^5.12.13",
     "node-fetch": "^2.6.1"
   },
   "devDependencies": {
