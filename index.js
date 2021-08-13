@@ -1,8 +1,8 @@
-const Discord = require("discord.js");
+const { Collection, Client, Intents } = require("discord.js");
 require("dotenv").config({ path: __dirname + "/.env" });
 const fs = require("fs");
 const mongoose = require(`mongoose`);
-const client = new Discord.Client();
+const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_PRESENCES, Intents.FLAGS.GUILD_MESSAGE_REACTIONS, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.GUILD_VOICE_STATES, Intents.FLAGS.GUILD_MEMBERS] });
 //connect to DB
 mongoose.connect(
   `mongodb+srv://Bot:${process.env.dbpass}@discordbot.xhsms.mongodb.net/discordBot?retryWrites=true&w=majority`,
@@ -15,8 +15,34 @@ mongoose.connect(
   useNewUrlParser:true,
   useUnifiedTopology:true
 })*/
+// Registering message context menu
+const { REST } = require("@discordjs/rest");
+const { Routes } = require("discord-api-types/v9");
 
-client.commands = new Discord.Collection();
+const commands = [{
+  "name": "Vote",
+  "type": 3
+}]
+
+const rest = new REST({ version: '9' }).setToken(process.env.TOKEN);
+
+(async () => {
+  try {
+    console.log('Started refreshing application commands.');
+
+    await rest.put(
+      Routes.applicationCommands(process.env.CLIENT_ID),
+      { body: commands },
+    );
+
+    console.log('Successfully reloaded application commands.');
+  } catch (error) {
+    console.error(error);
+  }
+})();
+
+// Registering commands to collection, and client
+client.commands = new Collection();
 const Folders = fs
   .readdirSync("./commands/", {
     withFileTypes: true,
@@ -47,7 +73,7 @@ fs.readdir("./events/", (err, files) => {
     client.on(evtName, evt.bind(null, client));
   });
 });
-client.login(process.env.TOKEN);
+
 client.on("error", (error) => {
   console.error(error);
   client.stopTyping();
@@ -56,3 +82,4 @@ client.on("warn", (error) => {
   console.warn(warn);
   client.stopTyping();
 });
+client.login(process.env.TOKEN);
