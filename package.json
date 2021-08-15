@@ -16,15 +16,13 @@
     "discord-api-types": "^0.22.0",
     "discord.js": "^13.1.0",
     "dotenv": "^8.6.0",
-    "erlpack": "github:discord/erlpack",
     "figlet": "^1.5.2",
     "fortnite-api-io": "^1.9.0",
     "genius-lyrics": "^4.2.9",
     "jimp": "^0.16.1",
     "mongoose": "^5.13.7",
     "node-fetch": "^2.6.1",
-    "utf-8-validate": "^5.0.5",
-    "zlib-sync": "^0.1.7"
+    "utf-8-validate": "^5.0.5"
   },
   "devDependencies": {
     "nodemon": "^2.0.12"

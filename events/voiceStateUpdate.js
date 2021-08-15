@@ -26,7 +26,7 @@ module.exports = async (client, oldState, newState) => {
   for (channelId of channelTable) {
     let ch = await newState.guild.channels.resolve(channelId);
     if (ch)
-      if ((await ch.type) === "voice" && ch.members.array().length <= 0) {
+      if ((await ch.type) === "GUILD_VOICE" && ch.members.size <= 0) {
         await ch.delete(`Channel empty > Auto create channels`);
         order.set(guild.id, order.get(guild.id) - 1);
         let temp = channelsToCheck.get(guild.id);
@@ -45,11 +45,12 @@ module.exports = async (client, oldState, newState) => {
   if (newState.channel === null) return;
   if (oldState.channel === newState.channel) return;
 
+
   const config = await Guild.findOne({ guildId: guild.id });
   if (!config || !config.voiceChannels) return;
 
   for (voiceChannel of config.voiceChannels) {
-    if (newState.channelID === voiceChannel.id) {
+    if (newState.channel.id === voiceChannel.id) {
       let resolved = await newState.guild.channels.resolve(voiceChannel.id);
       let chname = voiceChannel.text;
       if (!order.has(guild.id)) order.set(guild.id, 1);
@@ -57,13 +58,13 @@ module.exports = async (client, oldState, newState) => {
       chname = chname.replace("%NUMBER%", `${order.get(guild.id)}`);
       chname = chname.replace(
         "%GAME%",
-        newState.member.user.presence.activities[0]
-          ? newState.member.user.presence.activities[0].name
+        newState.member.presence.activities[0]
+          ? newState.member.presence.activities[0].name
           : config.noGame
       );
       guild.channels
         .create(chname, {
-          type: "voice",
+          type: "GUILD_VOICE",
           parent: config.createdCategory,
           reason: `Auto create channels`,
           userLimit: resolved.userLimit,
