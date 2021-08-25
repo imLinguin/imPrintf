@@ -7,8 +7,8 @@ module.exports = {
   aliases: ["cc"],
   run(message, args, client) {
     if (!isNaN(args[0])) {
-      if (message.member.hasPermission("MANAGE_MESSAGES")) {
-        if (message.guild.me.hasPermission("MANAGE_MESSAGES")) {
+      if (message.member.permissionsIn(message.channel).has("MANAGE_MESSAGES")) {
+        if (message.guild.me.permissionsIn(message.channel).has("MANAGE_MESSAGES")) {
           if (args[0] > 100) args[0] = 100;
           message.channel.bulkDelete(args[0], true).then((messages) => {
             message.channel
