@@ -45,7 +45,7 @@ module.exports = {
             );
           roles.push(args[1]);
           await config.updateOne({ autoRoles: roles });
-          message.react("764459481303875584");
+          message.react("🆗");
           break;
         case "delete":
         case "del":
@@ -61,7 +61,7 @@ module.exports = {
           }
 
           await config.updateOne({ autoRoles: roles });
-          message.react("764459481303875584");
+          message.react("🆗");
           break;
       }
     } else return message.reply(`You don't have permissions to do that!`);

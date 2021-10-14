@@ -24,7 +24,7 @@ module.exports = {
           .setFooter(`Game version: ${lastMap.patchVersion}`)
           .setColor(0x095ff);
 
-        message.channel.send(embed);
+        message.channel.send({embeds:{embed}});
         break;
       case "stats":
         message.channel.startTyping();
@@ -79,7 +79,7 @@ module.exports = {
             );
           }
 
-          message.channel.send(embed);
+          message.channel.send({embeds:[embed]});
           message.channel.stopTyping();
         } else {
           message.channel.stopTyping();

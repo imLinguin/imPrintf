@@ -41,7 +41,7 @@ module.exports = {
       .setDescription(pom2)
 
 
-    message.channel.send(embed);
+    message.channel.send({embeds:[embed]});
 
     message.delete();
 

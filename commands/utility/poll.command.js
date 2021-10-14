@@ -41,7 +41,7 @@ module.exports = {
 
 
 
-    message.channel.send(embed).then(messageReaction => {
+    message.channel.send({embeds:[embed]}).then(messageReaction => {
       messageReaction.react('👍');
       messageReaction.react('👎');
 

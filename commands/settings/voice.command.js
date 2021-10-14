@@ -9,7 +9,7 @@ module.exports = {
   aliases: ["vc"],
 
   async run(message, args, client) {
-    if (!message.member.hasPermission(`MANAGE_GUILD`))
+    if (!message.member.permissionsIn(message.channel).has("MANAGE_GUILD"))
       return message.reply(`You are not allowed to do that!`).then((m) => {
         m.delete({ timeout: 5000 });
       });
@@ -29,7 +29,7 @@ module.exports = {
           { guildId: message.guild.id },
           { createdCategory: id }
         );
-        message.react("764459481303875584");
+        message.react("🆗");
 
         break;
       case "create":
@@ -65,7 +65,7 @@ module.exports = {
               { guildId: message.guild.id },
               { voiceChannels: channels }
             );
-            message.react("764459481303875584");
+            message.react("🆗");
             break;
           case "delete":
           case "del":
@@ -84,7 +84,7 @@ module.exports = {
               { guildId: message.guild.id },
               { voiceChannels: channels }
             );
-            message.react("764459481303875584");
+            message.react("🆗");
             break;
 
           default:
@@ -107,7 +107,7 @@ module.exports = {
           { guildId: message.guild.id },
           { noGame: nogametitle }
         );
-        message.react("764459481303875584");
+        message.react("🆗");
         break;
       default:
         message.channel.send(

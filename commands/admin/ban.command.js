@@ -27,7 +27,7 @@ module.exports = {
           };
 
           message.channel.send({
-            embed: embed,
+            embeds: [embed],
           });
         } catch {
           return message.channel.send(`I couldn't ban ${member.user.tag}`);

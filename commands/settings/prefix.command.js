@@ -18,7 +18,7 @@ module.exports = {
                     return message.reply(`An error occured use setup command!`);
                 }
             })
-            message.react('764459481303875584');
+            message.react("🆗");
         }
         else return message.reply(`You don't have permissions to do that!`)
     }
