@@ -58,7 +58,7 @@ module.exports = async (client, oldState, newState) => {
       chname = chname.replace("%NUMBER%", `${order.get(guild.id)}`);
       chname = chname.replace(
         "%GAME%",
-        newState.member.presence.activities[0]
+        newState.member?.presence.activities[0]
           ? newState.member.presence.activities[0].name
           : config.noGame
       );
